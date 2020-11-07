@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stream_it/UI/videoPlayer.dart';
 import 'dart:ui';
 
 import 'package:stream_it/utilities/HeaderWidget.dart';
@@ -71,7 +72,12 @@ Widget blurNav(BuildContext context) {
                       Icons.play_arrow,
                       color: Colors.orange,
                     ),
-                    onPressed: null),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => VideoPlayerDemo()));
+                    }),
                 width: 60,
                 height: 60,
                 decoration:
