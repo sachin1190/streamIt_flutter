@@ -75,26 +75,31 @@ class _LoginPageState extends State<LoginPage> {
                       child: Center(
                         child: RaisedButton(
                           onPressed: () async {
-                            if (loginForm.currentState.validate()) {
-                              Map m = await Api().postService('/login', {
-                                'userName': usernameController.text,
-                                'password': passwordController.text
-                              });
-                              if (m['code'] == 200) {
-                                print('token is ${m['data']['accessToken']}');
-                                SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
-                                prefs.setString(
-                                    'token', m['data']['accessToken']);
-                                prefs.setString('', m['data']['role']);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
+                              Navigator.push(
+                                     context,
+                                  MaterialPageRoute(
                                         builder: (context) =>
-                                            VideoPlayerDemo()));
-                              } else
-                                showSnackBar(m['data']);
-                            }
+                                            VideoApp()));
+                            // if (loginForm.currentState.validate()) {
+                            //   Map m = await Api().postService('/login', {
+                            //     'userName': usernameController.text,
+                            //     'password': passwordController.text
+                            //   });
+                            //   if (m['code'] == 200) {
+                            //     print('token is ${m['data']['accessToken']}');
+                            //     SharedPreferences prefs =
+                            //         await SharedPreferences.getInstance();
+                            //     prefs.setString(
+                            //         'token', m['data']['accessToken']);
+                            //     prefs.setString('', m['data']['role']);
+                            //     Navigator.push(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //             builder: (context) =>
+                            //                 VideoApp()));
+                            //   } else
+                            //     showSnackBar(m['data']);
+                            // }
                           },
                           color: AppConstants.secondaryCol,
                           child: Text('Login'),
@@ -113,10 +118,11 @@ class _LoginPageState extends State<LoginPage> {
 
   void showSnackBar(String message) {
     scaffoldKey.currentState.showSnackBar(SnackBar(
+      backgroundColor: Colors.red,
       content: Text(message),
       duration: Duration(seconds: 2),
       action: SnackBarAction(
-        textColor: AppConstants.primaryCol,
+        textColor: Colors.white,
         label: 'OK',
         onPressed: () {
           // Some code to undo the change.

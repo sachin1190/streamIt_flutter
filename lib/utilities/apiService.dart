@@ -1,10 +1,6 @@
 import 'package:dio/dio.dart';
 
 class Api {
-//  ApiService._();
-//
-//  static final ApiService Api = ApiService._();
-
   Dio dio = new Dio();
   String baseUrl = 'http://192.168.43.12:8080/stream-it';
 
@@ -13,7 +9,9 @@ class Api {
       Response res = await dio.post(baseUrl + url, data: data);
       return {'code': res.statusCode, 'data': res.data};
     } catch (e) {
-      return {'code': '', 'data': e.response.data['message']};
+      String message =
+          e.response != null ? e.response.data['message'] : 'Network Error!';
+      return {'code': '', 'data': message};
     }
   }
 }
