@@ -36,6 +36,7 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
                   flexibleSpace: FlexibleSpaceBar(
                     title: Text("Stream IT",
                         style: TextStyle(
+                          fontFamily: 'Quicksand',
                           fontSize: 16.0,
                         )),
                   ),
@@ -54,7 +55,7 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
               ];
             },
             body: TabBarView(
-              children: [HomePage(), ImageSliderDemo(), Container()],
+              children: [HomePage(), GridDemo(), Container()],
             ),
           ),
         ),
@@ -63,25 +64,41 @@ class _MainCollapsingToolbarState extends State<MainCollapsingToolbar> {
   }
 }
 
+class GridDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+        child: Expanded(
+      child: GridView.count(
+        scrollDirection: Axis.horizontal,
+        crossAxisCount: 2,
+        children: List.generate(20, (index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: 80,
+              height: 80,
+              color: Colors.red,
+            ),
+          );
+        }),
+      ),
+    ));
+  }
+}
+
 class ImageSliderDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-      options: CarouselOptions(viewportFraction: 0.5, autoPlay: true),
+      options: CarouselOptions(
+          viewportFraction: 0.5, aspectRatio: 3, autoPlay: true),
       items: imgList
-          .map((item) => FittedBox(
-                alignment: Alignment.topCenter,
+          .map((item) => Card(
+                elevation: 2,
                 child: Container(
                   height: 80,
-                  child: FittedBox(
-                    alignment: Alignment.topCenter,
-                    child: Card(
-                      child: Container(
-                        height: 80,
-                        child: Image.network(item, fit: BoxFit.cover),
-                      ),
-                    ),
-                  ),
+                  child: InkWell(child: Image.network(item, fit: BoxFit.cover)),
                 ),
               ))
           .toList(),
@@ -164,9 +181,8 @@ final List<Widget> imageSliders = imgList
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-          child: Column(
+    return SingleChildScrollView(
+      child: Column(
         children: <Widget>[
           SizedBox(height: 16),
           CarouselSlider(
@@ -194,9 +210,9 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
-          ImageSliderDemo()
+          ImageSliderDemo(),
         ],
-      )),
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stream_it/UI/homePage.dart';
 import 'package:stream_it/UI/loginPage.dart';
+import 'package:stream_it/UI/splashScreen.dart';
 import 'package:stream_it/utilities/appConstants.dart';
 
 void main() {
@@ -12,9 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Stream It!',
       theme: ThemeData(
+        fontFamily: 'Quicksand',
         brightness: Brightness.light,
+        primarySwatch: Colors.green,
         primaryIconTheme: IconTheme.of(context).copyWith(color: Colors.white),
         iconTheme: IconTheme.of(context).copyWith(color: Colors.white),
         primaryTextTheme: Theme.of(context).textTheme.apply(
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
         primaryColor: AppConstants.primaryCol,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MainCollapsingToolbar(),
+      home: SplashScreen(),
     );
   }
 }
